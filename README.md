@@ -15,9 +15,10 @@ Proje ayrıca **Supabase** kullanılarak müşteri verilerinin güvenli bir şek
 ## Kullanılan Teknolojiler
 
 - [Next.js](https://nextjs.org) – React tabanlı framework
+- UI State Management Context API
 - [Supabase](https://supabase.com) – Database ve authentication
 - [TypeScript](https://www.typescriptlang.org) – Tip güvenliği
-- [TailwindCSS](https://tailwindcss.com) – Modern UI tasarımı
+- [TailwindCSS](https://tailwindcss.com) – Modern UI tasarımı-Styling
 
 ## Başlangıç
 

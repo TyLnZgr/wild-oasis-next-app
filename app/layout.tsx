@@ -1,24 +1,30 @@
-import Logo from "./components/Logo";
-import Navigation from "./components/Navigation";
+import Header from "./_components/Header";
 import "./global.css";
+import { Geist } from "next/font/google";
+const geist = Geist({
+  subsets: ["latin"],
+  display: "swap",
+});
 export const metadata = {
-  title: "The Wild Oasis",
+  title: {
+    template: "The Wild Oasis / %s",
+    default: "Welcome The Wild Oasis",
+  },
+  description: "Luxurious cabin hotel located in the Sapanca/Türkiye.",
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <header>
-          <Logo />
-          <Navigation />
-        </header>
-
-        <main>{children}</main>
-        <footer>© 2025 The Wild Oasis</footer>
+    <html lang="en" className={geist.className}>
+      <body className="bg-primary-950 text-primary-100 min-h-screen flex flex-col antialiased">
+        <Header />
+        <div className="flex-1 px-8 py-12 grid">
+          <main className="max-w-7xl mx-auto w-full">{children}</main>
+        </div>
       </body>
     </html>
   );
