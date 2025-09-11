@@ -4,18 +4,41 @@ export interface ICabin {
   maxCapacity: number;
   regularPrice: number;
   discount: number;
+  image?: string;
+  created_at?: number;
   description: string;
-  image: string;
+}
+export interface IGuest {
+  id: number;
+  fullName: string;
+  email: string;
+  nationalId: string;
+  nationality: string;
+  countryFlag: string;
+  phoneNumber: string;
+  created_at?: number;
+}
+export interface ISettings {
+  id: number;
+  created_at?: string;
+  minBookingLength: number;
+  maxBookingLength: number;
+  maxGuestsPerBooking: number;
+  breakfastPrice: number;
 }
 export interface IBooking {
-  id: string;
-  guestId: string;
+  id: number;
+  guestId: number;
+  cabinId: number;
   startDate: string;
   endDate: string;
-  numNights: string;
-  totalPrice: string;
+  cabinPrice: number;
+  numNights: number;
+  totalPrice: number;
   numGuests: number;
   status: string;
-  created_at: string;
-  cabins: { name: string; image: string };
+  created_at?: string;
+  observations: string;
+  hasBreakfast: boolean;
+  isPaid: boolean;
 }

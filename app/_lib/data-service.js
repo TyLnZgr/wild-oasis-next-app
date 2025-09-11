@@ -1,5 +1,5 @@
 import { eachDayOfInterval } from "date-fns";
-
+import { supabase } from "./supabase";
 /////////////
 // GET
 
@@ -37,11 +37,10 @@ export async function getCabinPrice(id) {
 export const getCabins = async function () {
   const { data, error } = await supabase
     .from("cabins")
-    .select("id, name, maxCapacity, regularPrice, discount, image")
+    .select("id, name, maxCapacity, regularPrice, discount, image, description")
     .order("name");
 
   if (error) {
-    console.error(error);
     throw new Error("Cabins could not be loaded");
   }
 
