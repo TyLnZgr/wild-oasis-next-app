@@ -1,12 +1,21 @@
 import React, { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Loading from "./loading";
+import FilterCabin from "../_components/FilterCabin";
+// export const revalidate = 3600;
 //Metadata
 export const metadata = {
   title: "Cabins",
 };
-
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const capacityParam = searchParams?.capacity;
+  const filter: string = Array.isArray(capacityParam)
+    ? capacityParam[0]
+    : capacityParam ?? "all";
   return (
     <div>
       <h1 className="text-4xl mb-5 text-accent-400 font-medium">
@@ -20,8 +29,12 @@ export default function Page() {
         home away from home. The perfect spot for a peaceful, calm vacation.
         Welcome to paradise.
       </p>
+      <div className="flex justify-end mb-8">
+        <FilterCabin />
+      </div>
+
       <Suspense fallback={<Loading />}>
-        <CabinList />
+        <CabinList filter={filter} />
       </Suspense>
     </div>
   );

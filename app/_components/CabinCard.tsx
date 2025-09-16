@@ -14,6 +14,7 @@ function CabinCard({ cabin }: { cabin: ICabin }) {
           fill
           alt={`Cabin ${name}`}
           className="object-cover border-r border-primary-800"
+          sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
       <div className="flex-grow">
