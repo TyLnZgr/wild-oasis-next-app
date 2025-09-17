@@ -4,7 +4,7 @@ export interface ICabin {
   maxCapacity: number;
   regularPrice: number;
   discount: number;
-  image?: string;
+  image: string;
   created_at?: number;
   description: string;
 }
@@ -41,4 +41,9 @@ export interface IBooking {
   observations: string;
   hasBreakfast: boolean;
   isPaid: boolean;
+}
+export interface ICountry {
+  name: string;
+  code: string;
+  flag: string;
 }

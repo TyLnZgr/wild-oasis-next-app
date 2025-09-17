@@ -1,4 +1,5 @@
 import Header from "./_components/Header";
+import { ReservationsProvider } from "./context/ReservationsContext";
 import "./global.css";
 import { Geist } from "next/font/google";
 const geist = Geist({
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body className="bg-primary-950 text-primary-100 min-h-screen flex flex-col antialiased">
         <Header />
         <div className="flex-1 px-8 py-12 grid">
-          <main className="max-w-7xl mx-auto w-full">{children}</main>
+          <main className="max-w-7xl mx-auto w-full">
+            <ReservationsProvider>{children}</ReservationsProvider>
+          </main>
         </div>
       </body>
     </html>

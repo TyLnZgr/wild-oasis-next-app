@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import CabinList from "../_components/CabinList";
 import Loading from "./loading";
 import FilterCabin from "../_components/FilterCabin";
+import ReservationReminder from "../_components/ReservationReminder";
 // export const revalidate = 3600;
 //Metadata
 export const metadata = {
@@ -33,8 +34,9 @@ export default function Page({
         <FilterCabin />
       </div>
 
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading />} key={filter}>
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );
