@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CabinCardSkeleton() {
+const CabinCardSkeleton: React.FC = () => {
   return (
     <div className="animate-pulse rounded-2xl bg-primary-900 p-4 shadow-md">
       <div className="h-48 w-full rounded-xl bg-primary-700 mb-4"></div>
@@ -8,4 +8,6 @@ export default function CabinCardSkeleton() {
       <div className="h-4 w-1/2 rounded bg-primary-700"></div>
     </div>
   );
-}
+};
+
+export default CabinCardSkeleton;

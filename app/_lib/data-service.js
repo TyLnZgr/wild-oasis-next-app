@@ -1,13 +1,24 @@
+import { notFound } from "next/navigation";
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
-import { notFound } from "next/navigation";
-//GET
+
+/////////////
+// GET
+
 export async function getCabin(id) {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("cabins")
     .select("*")
     .eq("id", id)
     .single();
+
+  // For testing
+  // await new Promise((res) => setTimeout(res, 2000));
+
+  if (error) {
+    console.error(error);
+    notFound();
+  }
 
   return data;
 }
@@ -18,8 +29,9 @@ export async function getCabinPrice(id) {
     .select("regularPrice, discount")
     .eq("id", id)
     .single();
+
   if (error) {
-    notFound();
+    console.error(error);
   }
 
   return data;
@@ -28,10 +40,14 @@ export async function getCabinPrice(id) {
 export const getCabins = async function () {
   const { data, error } = await supabase
     .from("cabins")
-    .select("id, name, maxCapacity, regularPrice, discount, image, description")
+    .select("id, name, maxCapacity, regularPrice, discount, image")
     .order("name");
 
+  // For testing
+  // await new Promise((res) => setTimeout(res, 2000));
+
   if (error) {
+    console.error(error);
     throw new Error("Cabins could not be loaded");
   }
 
@@ -40,7 +56,7 @@ export const getCabins = async function () {
 
 // Guests are uniquely identified by their email address
 export async function getGuest(email) {
-  const { data } = await supabase
+  const { data, error } = await supabase
     .from("guests")
     .select("*")
     .eq("email", email)
@@ -51,7 +67,7 @@ export async function getGuest(email) {
 }
 
 export async function getBooking(id) {
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from("bookings")
     .select("*")
     .eq("id", id)
@@ -66,7 +82,7 @@ export async function getBooking(id) {
 }
 
 export async function getBookings(guestId) {
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from("bookings")
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
     .select(
@@ -116,6 +132,8 @@ export async function getBookedDatesByCabinId(cabinId) {
 export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
 
+  // await new Promise((res) => setTimeout(res, 5000));
+
   if (error) {
     console.error(error);
     throw new Error("Settings could not be loaded");
@@ -149,7 +167,7 @@ export async function createGuest(newGuest) {
 
   return data;
 }
-
+/*
 export async function createBooking(newBooking) {
   const { data, error } = await supabase
     .from("bookings")
@@ -165,10 +183,11 @@ export async function createBooking(newBooking) {
 
   return data;
 }
-
+*/
 /////////////
 // UPDATE
 
+/*
 // The updatedFields is an object which should ONLY contain the updated data
 export async function updateGuest(id, updatedFields) {
   const { data, error } = await supabase
@@ -212,3 +231,4 @@ export async function deleteBooking(id) {
   }
   return data;
 }
+*/

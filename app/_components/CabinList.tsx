@@ -1,28 +1,36 @@
-//import { unstable_noStore as noStore } from "next/cache";
 import React from "react";
 import CabinCard from "./CabinCard";
 import { getCabins } from "../_lib/data-service";
 import { ICabin } from "../_type/cabins";
 
-export default async function CabinList({ filter }: { filter: string }) {
-  //noStore(); // Disable caching for this component
+interface CabinListProps {
+  filter: "all" | "small" | "medium" | "large";
+}
+
+const CabinList = async ({ filter }: CabinListProps) => {
+  // const cabins: ICabin[] = await getCabins({ cache: "no-store" }); // caching disabled
   const cabins: ICabin[] = await getCabins();
   if (!cabins.length) return null;
+
   let displayedCabins: ICabin[] = [];
-  if (filter === "all") {
-    displayedCabins = cabins;
+
+  switch (filter) {
+    case "all":
+      displayedCabins = cabins;
+      break;
+    case "small":
+      displayedCabins = cabins.filter((cabin) => cabin.maxCapacity <= 3);
+      break;
+    case "medium":
+      displayedCabins = cabins.filter(
+        (cabin) => cabin.maxCapacity >= 4 && cabin.maxCapacity <= 7
+      );
+      break;
+    case "large":
+      displayedCabins = cabins.filter((cabin) => cabin.maxCapacity >= 8);
+      break;
   }
-  if (filter === "small") {
-    displayedCabins = cabins.filter((cabin) => cabin.maxCapacity <= 3);
-  }
-  if (filter === "medium") {
-    displayedCabins = cabins.filter(
-      (cabin) => cabin.maxCapacity >= 4 && cabin.maxCapacity <= 7
-    );
-  }
-  if (filter === "large") {
-    displayedCabins = cabins.filter((cabin) => cabin.maxCapacity >= 8);
-  }
+
   return (
     <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 xl:gap-14">
       {displayedCabins.map((cabin) => (
@@ -30,4 +38,6 @@ export default async function CabinList({ filter }: { filter: string }) {
       ))}
     </div>
   );
-}
+};
+
+export default CabinList;

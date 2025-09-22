@@ -2,8 +2,13 @@ import Image from "next/image";
 import { UsersIcon } from "@heroicons/react/24/solid";
 import { ICabin } from "../_type/cabins";
 import Link from "next/link";
+import React from "react";
 
-function CabinCard({ cabin }: { cabin: ICabin }) {
+interface CabinCardProps {
+  cabin: ICabin;
+}
+
+const CabinCard: React.FC<CabinCardProps> = ({ cabin }) => {
   const { image = "", id, name, maxCapacity, regularPrice, discount } = cabin;
 
   return (
@@ -31,7 +36,7 @@ function CabinCard({ cabin }: { cabin: ICabin }) {
           </div>
 
           <p className="flex gap-3 justify-end items-baseline">
-            {discount > 0 ? (
+            {discount && discount > 0 ? (
               <>
                 <span className="text-3xl font-[350]">
                   ${regularPrice - discount}
@@ -58,6 +63,6 @@ function CabinCard({ cabin }: { cabin: ICabin }) {
       </div>
     </div>
   );
-}
+};
 
 export default CabinCard;
