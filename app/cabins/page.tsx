@@ -8,14 +8,15 @@ import ReservationReminder from "../_components/ReservationReminder";
 export const metadata = {
   title: "Cabins",
 };
-export default function Page({
+export default async function Page({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const capacityParam = searchParams?.capacity;
-  const filter: string = Array.isArray(capacityParam)
-    ? capacityParam[0]
+  const params = await searchParams;
+  const capacityParam = params?.capacity;
+  const filter = Array.isArray(capacityParam)
+    ? capacityParam?.[0]
     : capacityParam ?? "all";
   return (
     <div>

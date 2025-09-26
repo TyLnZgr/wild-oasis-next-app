@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import { updateProfile } from "../_lib/actions";
-import { useFormStatus } from "react-dom";
+import SpinnerButton from "./SpinnerButton";
 
 type IProps = {
   children: React.ReactNode;
@@ -64,19 +64,8 @@ export default function UpdateProfileForm({ children, guest }: IProps) {
       </div>
 
       <div className="flex justify-end items-center gap-6">
-        <Button />
+        <SpinnerButton pendingText="Updating">Update profile</SpinnerButton>
       </div>
     </form>
-  );
-}
-function Button() {
-  const { pending } = useFormStatus();
-  return (
-    <button
-      className="bg-accent-500 px-8 py-4 text-primary-800 font-semibold hover:bg-accent-600 transition-all disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-gray-300"
-      disabled={pending}
-    >
-      {pending ? "Updating.." : "Update profile"}
-    </button>
   );
 }

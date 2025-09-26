@@ -40,7 +40,7 @@ export async function getCabinPrice(id) {
 export const getCabins = async function () {
   const { data, error } = await supabase
     .from("cabins")
-    .select("id, name, maxCapacity, regularPrice, discount, image")
+    .select("id, name, maxCapacity, regularPrice, discount, image,description")
     .order("name");
 
   // For testing
@@ -204,20 +204,6 @@ export async function updateGuest(id, updatedFields) {
   return data;
 }
 
-export async function updateBooking(id, updatedFields) {
-  const { data, error } = await supabase
-    .from("bookings")
-    .update(updatedFields)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) {
-    console.error(error);
-    throw new Error("Booking could not be updated");
-  }
-  return data;
-}
 
 /////////////
 // DELETE

@@ -4,7 +4,7 @@ import { getCabins } from "../_lib/data-service";
 import { ICabin } from "../_type/cabins";
 
 interface CabinListProps {
-  filter: "all" | "small" | "medium" | "large";
+  filter: string;
 }
 
 const CabinList = async ({ filter }: CabinListProps) => {
