@@ -1,18 +1,19 @@
 import { getBookedDatesByCabinId, getCabin } from "@/app/_lib/data-service";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { cabinId: string } }
 ) {
   const { cabinId } = params;
+
   try {
     const [cabin, bookedDates] = await Promise.all([
       getCabin(cabinId),
       getBookedDatesByCabinId(cabinId),
     ]);
-    return Response.json({ cabin, bookedDates });
+    return NextResponse.json({ cabin, bookedDates });
   } catch {
-    return Response.json({ error: "Cabin not found" });
+    return NextResponse.json({ error: "Cabin not found" }, { status: 404 });
   }
 }
-//server actionları var artık çok gerekli değil
