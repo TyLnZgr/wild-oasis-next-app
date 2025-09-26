@@ -1,11 +1,11 @@
-import { getBookedDatesByCabinId, getCabin } from "@/app/_lib/data-service";
 import { NextRequest, NextResponse } from "next/server";
+import { getBookedDatesByCabinId, getCabin } from "@/app/_lib/data-service";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { cabinId: string } }
+  context: { params: Promise<{ cabinId: string }> }
 ) {
-  const { cabinId } = params;
+  const { cabinId } = await context.params;
 
   try {
     const [cabin, bookedDates] = await Promise.all([
