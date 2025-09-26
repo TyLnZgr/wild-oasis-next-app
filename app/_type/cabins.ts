@@ -32,15 +32,24 @@ export interface IBooking {
   cabinId: number;
   startDate: string;
   endDate: string;
-  cabinPrice: number;
+  /* cabinPrice: number; */
   numNights: number;
   totalPrice: number;
   numGuests: number;
-  status: string;
+  /* status: string; */
   created_at?: string;
-  observations: string;
+  /* observations: string;
   hasBreakfast: boolean;
-  isPaid: boolean;
+  isPaid: boolean; */
+  cabins:
+    | {
+        name: string;
+        image: string;
+      }
+    | {
+        name: string;
+        image: string;
+      }[];
 }
 export interface ICountry {
   name: string;
